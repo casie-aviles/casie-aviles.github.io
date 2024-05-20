@@ -16,8 +16,9 @@
     </style>
 </head>
 <body>
-    <h1>Test Dialogflow Messenger</h1>
-    <df-messenger
+    <!-- <h1>Test Dialogflow Messenger</h1> -->
+    <h1>Test Voiceflow Chatbot</h1>
+    <!-- <df-messenger
         oauth-client-id="442813911100-oqajm1e87p27t507e5gudq35e3cjmjcj.apps.googleusercontent.com"
         location="eu"
         project-id="automee-default"
@@ -25,6 +26,19 @@
         language-code="en"
         max-query-length="-1">
         <df-messenger-chat-bubble chat-title="Agent Test"></df-messenger-chat-bubble>
-    </df-messenger>
+    </df-messenger> -->
+    <script type="text/javascript">
+        (function(d, t) {
+            var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            v.onload = function() {
+              window.voiceflow.chat.load({
+                verify: { projectID: '66473a9c49c2b9fe2aa2017c' },
+                url: 'https://general-runtime.voiceflow.com',
+                versionID: 'production'
+              });
+            }
+            v.src = "https://cdn.voiceflow.com/widget/bundle.mjs"; v.type = "text/javascript"; s.parentNode.insertBefore(v, s);
+        })(document, 'script');
+    </script>
 </body>
 </html>
