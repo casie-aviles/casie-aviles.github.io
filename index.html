@@ -1,30 +1,213 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
-<script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
-<df-messenger
-  oauth-client-id="442813911100-oqajm1e87p27t507e5gudq35e3cjmjcj.apps.googleusercontent.com"
-  location="eu"
-  project-id="automee-default"
-  agent-id="fad550fa-c265-4b2e-9f29-0fb9076cdd1f"
-  language-code="en"
-  max-query-length="-1">
-  <df-messenger-chat-bubble
-   chat-title="Agent Test">
-  </df-messenger-chat-bubble>
-</df-messenger>
-<style>
-  df-messenger {
-    z-index: 999;
-    position: fixed;
-    bottom: 16px;
-    right: 16px;
-  }
-</style>
+  <link rel="stylesheet" href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
+  <style>
+    ::selection {
+      background: #ffe97a;
+      color: #232323;
+    }
+    ::-moz-selection {
+      background: #ffe97a;
+      color: #232323;
+    }
+    html {
+      height: 100%;
+      width: 100%;
+      cursor: url("assets/3dwarro.cur"), auto;
+      background: url('assets/lain_bg_crt.png') no-repeat center center fixed;
+      background-size: cover;
+    }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      background: url('assets/scanlines_texture.png') repeat;
+      opacity: 0.05;
+      z-index: 9999;
+    }
+    body {
+      font-family: 'Fixedsys', monospace;
+      margin: 0;
+      overflow: hidden; /* keep "desktop" feel */
+    }
+
+    /* Generic window style */
+    .window {
+      position: absolute;
+      top: 100px;
+      left: 100px;
+      border: 2px solid gray;
+      box-shadow: 0 0 0 2px black, 0 4px 24px rgba(0,0,0,0.6);
+      border-radius: 0;
+      overflow: hidden;
+      background: blue;
+      z-index: 1;
+      min-width: 200px;
+    }
+    .window-header {
+      background: #dbdbdb;
+      height: 28px;
+      border-bottom: 2px solid gray;
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+      font-family: 'Fixedsys', monospace;
+      font-size: 0.9rem;
+      color: gray;
+      cursor: move;
+      user-select: none;
+    }
+    .terminal-buttons {
+      display: flex;
+      gap: 4px;
+      margin-right: 12px;
+    }
+    .terminal-btn {
+      width: 12px;
+      height: 12px;
+      display: inline-block;
+      border: 1px solid #232323;
+      cursor: pointer;
+      position: relative;
+    }
+    /* Minimize button (yellow with black line) */
+    .btn-minimize {
+      background:#dbdbdb;
+    }
+    .btn-minimize::after {
+      content: "";
+      position: absolute;
+      bottom: 3px;
+      left: 3px;
+      right: 3px;
+      height: 2px;
+      background: #232323;
+    }
+
+    .window-content {
+      padding: 18px 20px 24px 20px;
+      color: white;
+    }
+
+    /* About-specific */
+    .about-window {
+      max-width: 600px;
+      background: blue;
+      color: white;
+      resize: both;          /* ← enable horizontal + vertical resizing */
+      overflow: auto;
+    }
+
+    /* Image viewer-specific */
+    .image-viewer {
+      max-width: 220px;
+      background: black;
+      display: flex;
+      flex-direction: column;
+      resize: both;          /* ← enable horizontal + vertical resizing */
+      overflow: auto;
+    }
+    .image-content {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+    .image-content img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  </style>
 </head>
 <body>
-    <!-- <h1>Test Dialogflow Messenger</h1> -->
-    <h1>Test Vertex AI + Dialogflow Chatbot</h1>
+  
+  <!-- Image Viewer Window -->
+  <div class="window image-viewer" style="top: 15%; left: 30%;">
+    <div class="window-header">
+      <div class="terminal-buttons">
+        <span class="terminal-btn btn-minimize"></span>
+      </div>
+      <span>portrait.png</span>
+    </div>
+    <div class="image-content">
+      <img src="assets/dithered_portrait_nocolor.png" alt="Casie Aviles Portrait">
+    </div>
+  </div>
+
+  <!-- About Window -->
+  <div class="window about-window" style="top: 15%; left: 45%;">
+    <div class="window-header">
+      <div class="terminal-buttons">
+        <span class="terminal-btn btn-minimize"></span>
+      </div>
+      <span>casie@about-me: ~</span>
+    </div>
+    <div class="window-content">
+      <h1 style="font-size:1.3rem; margin:0 0 1rem 0; color:yellow;">&gt; about me</h1>
+      <p>
+        Hi! I'm Casie Aviles. I’m passionate about both technology and art, two worlds that inspire me to learn and create.
+        Whether I’m building something new or expressing myself creatively, I love exploring how engineering and artistic
+        thinking come together. For me, learning and creating are at the heart of everything I do, bridging the gap between
+        the technical and the imaginative.
+      </p>
+    </div>
+  </div>
+
+  <script>
+
+    // Make windows draggable
+    document.querySelectorAll('.window').forEach(win => {
+      const header = win.querySelector('.window-header');
+      let offsetX, offsetY, isDragging = false;
+
+      header.addEventListener('mousedown', e => {
+        isDragging = true;
+        offsetX = e.clientX - win.offsetLeft;
+        offsetY = e.clientY - win.offsetTop;
+        // bring window to front
+        document.querySelectorAll('.window').forEach(w => w.style.zIndex = 1);
+        win.style.zIndex = 1000;
+      });
+
+      document.addEventListener('mousemove', e => {
+        if (!isDragging) return;
+        win.style.left = (e.clientX - offsetX) + 'px';
+        win.style.top = (e.clientY - offsetY) + 'px';
+      });
+
+      document.addEventListener('mouseup', () => {
+        isDragging = false;
+      });
+    });
+
+    // Minimize windows on yellow button click
+    document.querySelectorAll('.btn-minimize').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const win = btn.closest('.window');
+        const content = win.querySelector('.window-content, .image-content');
+        if (!content) return;
+
+        if (content.style.display === 'none') {
+          // restore
+          content.style.display = '';
+          win.style.height = ''; 
+        } else {
+          // minimize
+          content.style.display = 'none';
+          win.style.height = '28px'; // header-only
+        }
+      });
+    });
+  </script>
 </body>
 </html>
