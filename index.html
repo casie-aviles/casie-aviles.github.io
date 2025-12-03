@@ -1,213 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/themes/df-messenger-default.css">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <script src="https://www.gstatic.com/dialogflow-console/fast/df-messenger/prod/v1/df-messenger.js"></script>
-  <style>
-    ::selection {
-      background: #ffe97a;
-      color: #232323;
-    }
-    ::-moz-selection {
-      background: #ffe97a;
-      color: #232323;
-    }
-    html {
-      height: 100%;
-      width: 100%;
-      cursor: url("assets/3dwarro.cur"), auto;
-      background: url('assets/lain_bg_crt.png') no-repeat center center fixed;
-      background-size: cover;
-    }
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      pointer-events: none;
-      background: url('assets/scanlines_texture.png') repeat;
-      opacity: 0.05;
-      z-index: 9999;
-    }
-    body {
-      font-family: 'Fixedsys', monospace;
-      margin: 0;
-      overflow: hidden; /* keep "desktop" feel */
-    }
-
-    /* Generic window style */
-    .window {
-      position: absolute;
-      top: 100px;
-      left: 100px;
-      border: 2px solid gray;
-      box-shadow: 0 0 0 2px black, 0 4px 24px rgba(0,0,0,0.6);
-      border-radius: 0;
-      overflow: hidden;
-      background: blue;
-      z-index: 1;
-      min-width: 200px;
-    }
-    .window-header {
-      background: #dbdbdb;
-      height: 28px;
-      border-bottom: 2px solid gray;
-      display: flex;
-      align-items: center;
-      padding: 0 8px;
-      font-family: 'Fixedsys', monospace;
-      font-size: 0.9rem;
-      color: gray;
-      cursor: move;
-      user-select: none;
-    }
-    .terminal-buttons {
-      display: flex;
-      gap: 4px;
-      margin-right: 12px;
-    }
-    .terminal-btn {
-      width: 12px;
-      height: 12px;
-      display: inline-block;
-      border: 1px solid #232323;
-      cursor: pointer;
-      position: relative;
-    }
-    /* Minimize button (yellow with black line) */
-    .btn-minimize {
-      background:#dbdbdb;
-    }
-    .btn-minimize::after {
-      content: "";
-      position: absolute;
-      bottom: 3px;
-      left: 3px;
-      right: 3px;
-      height: 2px;
-      background: #232323;
-    }
-
-    .window-content {
-      padding: 18px 20px 24px 20px;
-      color: white;
-    }
-
-    /* About-specific */
-    .about-window {
-      max-width: 600px;
-      background: blue;
-      color: white;
-      resize: both;          /* ← enable horizontal + vertical resizing */
-      overflow: auto;
-    }
-
-    /* Image viewer-specific */
-    .image-viewer {
-      max-width: 220px;
-      background: black;
-      display: flex;
-      flex-direction: column;
-      resize: both;          /* ← enable horizontal + vertical resizing */
-      overflow: auto;
-    }
-    .image-content {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      overflow: hidden;
-    }
-    .image-content img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-  </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Casie Aviles | AI & Automation Engineer</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  
-  <!-- Image Viewer Window -->
-  <div class="window image-viewer" style="top: 15%; left: 30%;">
-    <div class="window-header">
-      <div class="terminal-buttons">
-        <span class="terminal-btn btn-minimize"></span>
-      </div>
-      <span>portrait.png</span>
-    </div>
-    <div class="image-content">
-      <img src="assets/dithered_portrait_nocolor.png" alt="Casie Aviles Portrait">
-    </div>
-  </div>
+  <header>
+    <h1>Casie Aviles</h1>
+    <p class="subtitle">AI & Automation Engineer</p>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#tech">Tech Stack</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
 
-  <!-- About Window -->
-  <div class="window about-window" style="top: 15%; left: 45%;">
-    <div class="window-header">
-      <div class="terminal-buttons">
-        <span class="terminal-btn btn-minimize"></span>
-      </div>
-      <span>casie@about-me: ~</span>
-    </div>
-    <div class="window-content">
-      <h1 style="font-size:1.3rem; margin:0 0 1rem 0; color:yellow;">&gt; about me</h1>
+  <main>
+    <section id="about">
+      <h2>About</h2>
       <p>
-        Hi! I'm Casie Aviles. I’m passionate about both technology and art, two worlds that inspire me to learn and create.
-        Whether I’m building something new or expressing myself creatively, I love exploring how engineering and artistic
-        thinking come together. For me, learning and creating are at the heart of everything I do, bridging the gap between
-        the technical and the imaginative.
+        I connect tools, data, and workflows to help teams work better. I focus on using AI
+        to make work easier and not to replace people.I approach problems with speed,
+        curiosity, and experimentation. I value progress over perfection and learning along the way.
       </p>
-    </div>
-  </div>
+      <br>
+      <p>
+        Outside work, I explore the intersection of technology and art through games,
+        digital illustration, and creative experimentation. I approach every project with care and
+        a drive to make technology meaningful and engaging.
+      </p>
+    </section>
 
-  <script>
+    <section id="experience">
+      <h2>Experience</h2>
 
-    // Make windows draggable
-    document.querySelectorAll('.window').forEach(win => {
-      const header = win.querySelector('.window-header');
-      let offsetX, offsetY, isDragging = false;
+      <div class="job">
+        <h3>AI & Automation Engineer</h3>
+        <p class="company">Brainforge AI · Remote (US) · Full-time</p>
+        <p class="date">Nov 2024 – Present</p>
+        <ul>
+          <li>Built custom AI workspace assistant using internal docs for production support</li>
+          <li>Automated Zoom transcript capture → Slack meeting summaries + searchable RAG tool</li>
+          <li>Designed vector-based retrieval for context-aware querying over documents & meetings</li>
+          <li>Engineered Slackbots leveraging external APIs for lead enrichment & task automation</li>
+          <li>Created spreadsheet-driven CRM automations with proactive AI follow-ups</li>
+        </ul>
+      </div>
 
-      header.addEventListener('mousedown', e => {
-        isDragging = true;
-        offsetX = e.clientX - win.offsetLeft;
-        offsetY = e.clientY - win.offsetTop;
-        // bring window to front
-        document.querySelectorAll('.window').forEach(w => w.style.zIndex = 1);
-        win.style.zIndex = 1000;
-      });
+      <div class="job">
+        <h3>AI Support Specialist</h3>
+        <p class="company">autoMEE · Remote (Poland) · Full-time</p>
+        <p class="date">Mar – Nov 2024</p>
+        <ul>
+          <li>Built GPT-based chatbots tailored to client workflows across diverse industries</li>
+          <li>Automated CRM processes to reduce manual workload</li>
+          <li>Created OCR + Gemini pipelines for document text extraction</li>
+        </ul>
+      </div>
 
-      document.addEventListener('mousemove', e => {
-        if (!isDragging) return;
-        win.style.left = (e.clientX - offsetX) + 'px';
-        win.style.top = (e.clientY - offsetY) + 'px';
-      });
+      <div class="job">
+        <h3>AI Labs Department Intern</h3>
+        <p class="company">Stratpoint Global Outsourcing Inc · PH · Internship</p>
+        <p class="date">Sep – Nov 2023</p>
+        <ul>
+          <li>Full-stack development + computer vision + NLP training program</li>
+          <li>Developed synthetic image data to retrain ROI detection model</li>
+          <li>Evaluated LLM responses across specialized metrics</li>
+        </ul>
+      </div>
+    </section>
 
-      document.addEventListener('mouseup', () => {
-        isDragging = false;
-      });
-    });
+    <section id="tech">
+      <h2>Tech Stack</h2>
+      <ul class="tech-list">
+        <li>Python</li><li>n8n</li><li>LangChain</li><li>LangFuse</li><li>PostgreSQL</li>
+        <li>React</li><li>TypeScript</li><li>Next.js</li><li>Tailwind CSS</li><li>Node.js</li>
+        <li>Cursor</li>
+      </ul>
+    </section>
 
-    // Minimize windows on yellow button click
-    document.querySelectorAll('.btn-minimize').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const win = btn.closest('.window');
-        const content = win.querySelector('.window-content, .image-content');
-        if (!content) return;
+    <section id="projects">
+      <h2>Featured Projects</h2>
+      <p>Coming soon — personal experiments at the intersection of AI, tooling, and creative automation.</p>
+    </section>
 
-        if (content.style.display === 'none') {
-          // restore
-          content.style.display = '';
-          win.style.height = ''; 
-        } else {
-          // minimize
-          content.style.display = 'none';
-          win.style.height = '28px'; // header-only
-        }
-      });
-    });
-  </script>
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Let’s build something useful together.</p>
+      <p>
+        <a href="mailto:casieaviles.dev@gmail.com">casieaviles.dev@gmail.com</a> ·
+        <a href="https://github.com/casie-aviles" target="_blank">GitHub</a> ·
+        <a href="https://www.linkedin.com/in/casie-aviles-b7011617b/" target="_blank">LinkedIn</a>
+      </p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 · Built by Casie Aviles</p>
+  </footer>
 </body>
 </html>
